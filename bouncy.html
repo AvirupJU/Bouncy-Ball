@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+    <style>
+    body{margin:0px; padding:0px; overflow:hidden}
+</style>
+</head>
+<body>
+   
+    <canvas id="myCanvas"></canvas>
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var c = canvas.getContext('2d');
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        
+        var w = canvas.width;
+        var h = canvas.height;
+        var xpos =0;
+        var ypos=0;
+        var xspeed=5;
+        var yspeed=5;
+        var bounces=0;
+        function Square(x,y,side,color){
+            c.beginPath;
+            c.fillStyle=color;
+            c.fillRect(x,y,side,side);
+            c.closePath;
+        }
+        function init()
+        {
+            
+            xpos = w/2;
+            ypos = h/2;
+            draw();
+        }
+        function draw()
+        {
+            c.clearRect(0,0,w,h);
+            Square(xpos,ypos,10,"#FF0000");
+            c.font ="30px Arial";
+            c.fillText("Bounces : "+bounces,w/2,h/2);
+            update();
+            requestAnimationFrame(draw);
+            
+        }
+        function update()
+        {
+            xpos+=xspeed;
+            ypos+=yspeed;
+            if(xpos+10>w || xpos+10<0){
+                xspeed = -xspeed;
+                bounces++;
+            }
+            if(ypos+10>h || ypos+10<0){
+                yspeed = -yspeed;
+                bounces++;
+            }
+        }
+        
+        init();
+        
+    </script>
+</body>
+</html>
